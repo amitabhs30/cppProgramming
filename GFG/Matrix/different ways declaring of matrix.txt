@@ -1,0 +1,12 @@
+1. Traditional 2D matrix arr[R][C]
+2. C Style - Double pointer-- **arr: where there is an array of pointers containing the
+first address of first element of every row(which is also a pointer), thus double pointer.
+3. C++ - Array of vectors- vector<int> arr[R] :as the name says we have a array of vectors where each vector 
+represents the row in our matrix and the size of array represents the no. of rows.
+In this type of declaration the size of an individual row is dynamic in nature but the no. of rows is not dynamic.
+4.c++ -vector of vector- vector<vector<int>>arr:As the name says we have a vector containing 
+vectors(individual rows of the matrix).
+the no. of vectors in the vector<vector<int>> represents the no. of rows in the matrix.
+In this type of declaration the size of rows and column is both dynamic in nature, both can 
+be changed while implementation.
+
