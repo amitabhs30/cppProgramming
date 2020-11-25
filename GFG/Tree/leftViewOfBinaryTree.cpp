@@ -1,6 +1,6 @@
 #include<iostream>
 #include<algorithm>
-
+#include<queue>
 
 using namespace std;
 
@@ -28,12 +28,39 @@ void printLeftView(node *root,int level)
     {
         if(maxLevel<level)
         {
-            cout<<root->data<<" ";
             maxLevel=level;
         }
+            cout<<root->data<<" ";
         printLeftView(root->left,level+1);
         printLeftView(root->right,level+1);
     }
+}
+
+void printLeftViewIterative(node *root)
+{
+    queue<node*>q;
+    if(root==NULL)
+    {
+        return;
+    }
+    q.push(root);
+
+    while(!(q.empty()))
+    {
+        int count=q.size();
+        for(int i=0;i<count;i++)
+        {
+            node* t=q.front();
+            q.pop();
+            if(i==0)
+                cout<<t->data<<" ";
+            if(t->left!=NULL)
+                q.push(t->left);
+            if(t->right!=NULL)
+                q.push(t->right);       
+        }
+    }
+
 }
 
 
@@ -54,7 +81,8 @@ void createTree()
 int main()
 {
     createTree();
-    printLeftView(root,1);
+    //printLeftView(root,1);
+    printLeftViewIterative(root);
     return 0;
 }
 
