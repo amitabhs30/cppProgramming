@@ -55,9 +55,6 @@ node *findLCA(int n1, int n2, node *root)
     if (findPath(n1, root, p1) == false || findPath(n2, root, p2) == false)
         return NULL;
 
-    if (p1[p1.size() - 1] == p2[p2.size() - 1])
-        return p1[p1.size() - 1];
-
     for (int i = 0; i < p1.size() && i < p2.size(); i++)
     {
         if (i + 1 == p1.size())
