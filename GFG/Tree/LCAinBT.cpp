@@ -25,11 +25,8 @@ void createTree()
     root = temp;
     root->left = new node(20);
     root->right = new node(30);
-    root->left->left = new node(40);
-    root->left->right = new node(50);
     root->right->left = new node(60);
     root->right->right = new node(70);
-    root->right->left->left = new node(80);
 }
 
 bool findPath(int n, node *root, vector<node *> &p)
@@ -65,6 +62,23 @@ node *findLCA(int n1, int n2, node *root)
             return p1[i];
     }
     return NULL;
+}
+
+
+node* findLCAe(int n1,int n2,node *root)
+{
+    if(root==NULL)return NULL;
+
+    if(root->data==n1||root->data==n2)
+    return root;
+
+    node *lh=findLCAe(n1,n2,root->left);
+    node *rh=findLCAe(n1,n2,root->right);
+
+    if(lh!=NULL&&rh!=NULL)
+        return root;
+    if(lh!=NULL) return lh;
+    else return rh;
 }
 
 int main()
