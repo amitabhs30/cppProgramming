@@ -11,6 +11,39 @@ void addEdge(vector<int> adl[], int v1, int v2)
     adl[v2].push_back(v1);
 }
 
+
+
+void dfsRecur(vector<int>adl[],int v,vector<bool>&visited,int src)
+{
+    cout<<src<<" ";
+    visited[src]=true;
+    for(auto e:adl[src])
+    {
+        if(!visited[e])
+        {
+            dfsRecur(adl,v,visited,e);
+        }
+    }
+}
+
+
+void DFS(vector<int>adl[],int v)
+{
+    vector<bool>visited(v);
+    for(int i=0;i<v;i++)visited[i]=false;
+
+    for(int i=0;i<v;i++)
+    {
+        if(!visited[i])
+        {
+            dfsRecur(adl,v,visited,i);
+        }
+    }
+
+}
+
+
+
 int main()
 {
 
@@ -28,5 +61,6 @@ int main()
         cin >> v1 >> v2;
         addEdge(adl, v1, v2);
     }
+    DFS(adl,v);
     return 0;
 }
