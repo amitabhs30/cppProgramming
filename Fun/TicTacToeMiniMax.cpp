@@ -80,9 +80,9 @@ int minimax(int depth, bool ismaxi)
 {
     int score = findResult();
     if (score == 10)
-        return 10;
+        return 10 - depth;
     if (score == -10)
-        return -10;
+        return -10 + depth;
     if (isFinished())
         return 0;
     if (ismaxi)
@@ -120,30 +120,48 @@ int minimax(int depth, bool ismaxi)
         return best;
     }
 }
+bool isEmpty()
+{
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (board[i][j] != '_')
+                return false;
+        }
+    }
+    return true;
+}
 
 moov *aiTurn()
 {
     moov *mov = new moov(-1, -1);
     int bestVal = INT16_MIN;
-
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < 3; j++)
+    if (!isEmpty())
+        for (int i = 0; i < 3; i++)
         {
-            if (board[i][j] == '_')
+            for (int j = 0; j < 3; j++)
             {
-                board[i][j] = 'X';
-                int moveVal = minimax(0, false);
-                board[i][j] = '_';
-                if (moveVal >= bestVal)
+                if (board[i][j] == '_')
                 {
-                    bestVal = moveVal;
-                    mov->x = i;
-                    mov->y = j;
+                    board[i][j] = 'X';
+                    int moveVal = minimax(0, false);
+                    board[i][j] = '_';
+                    if (moveVal > bestVal)
+                    {
+                        bestVal = moveVal;
+                        mov->x = i;
+                        mov->y = j;
+                    }
                 }
             }
         }
+    else
+    {
+        mov->x=rand()%3;
+        mov->y=rand()%3;
     }
+        
     return mov;
 }
 moov *humanTurn()
@@ -162,8 +180,8 @@ JUMP:
 }
 void play()
 {
-    cout<<"All you have to do to play is give the row no and column no from 1 to 3.\nYou are O";
-    int turn = rand() % 2;
+    cout << "All you have to do to play is give the row no and column no from 1 to 3.\nYou are O";
+    int turn =rand()%2;
     while (!isFinished())
     {
         if (turn)
@@ -200,7 +218,8 @@ int main()
     while (true)
     {
         int choice;
-        cout <<endl<<"Press 1 to play 0 to quit!";
+        cout << endl
+             << "Press 1 to play 0 to quit!";
         cin >> choice;
         switch (choice)
         {
@@ -217,10 +236,9 @@ int main()
         case 0:
             return 0;
         default:
-            cout<<"Wrong choice!"<<endl;
+            cout << "Wrong choice!" << endl;
             continue;
         }
-
     }
     return 0;
 }
