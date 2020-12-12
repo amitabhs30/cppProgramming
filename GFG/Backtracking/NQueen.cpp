@@ -1,3 +1,53 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<int> position(20, 0);
+
+bool canPlace(int k, int i)
+{
+    for (int j = 0; j < k; j++)
+        if ((position[j] == i) || abs(position[j] - i) == abs(j - k))
+            return false;
+    return true;
+}
+
+void NQueen(int k, int n)
+{
+
+    for (int i = 0; i < n; i++)
+    {
+        if (canPlace(k, i))
+        {
+            position[k] = i;
+            if (k == n - 1)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    cout << position[i] << " ";
+                }
+                cout << endl;
+            }
+            else
+            {
+                NQueen(k + 1, n);
+            }
+        }
+    }
+}
+
+int main()
+{
+    cout << "Enter the size of the board";
+    int N;
+    cin >> N;
+    NQueen(0, N);
+    return 0;
+}
+
+/*
+
 #include<iostream>
 #include<vector>
 
@@ -66,3 +116,5 @@ int main(){
         cout<<"Not possible to place all queens!";    
     return 0;
 }
+
+*/
