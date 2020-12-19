@@ -1,11 +1,11 @@
 #include<iostream>
 #include<vector>
 #include<cmath>
-int X=8;
+
 
 using namespace std;
 
-
+double X;
 
 void setFirstValues(vector<vector<double> >mat,vector<vector<double> >&res)
 {
@@ -28,6 +28,7 @@ void setFirstValues(vector<vector<double> >mat,vector<vector<double> >&res)
             break;
             }
     }
+    X=sqrt(div);
 
     res[1][1]=round((mat[0][0]+mat[0][1]+mat[1][0]+mat[1][1])/div);
     res[1][0]=round((mat[0][0]+mat[1][0])/X-res[1][1]);
