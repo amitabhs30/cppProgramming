@@ -25,8 +25,6 @@ void dfsRecur(vector<int>adl[],int v,vector<bool>&visited,int src)
         }
     }
 }
-
-
 void DFS(vector<int>adl[],int v)
 {
     vector<bool>visited(v);

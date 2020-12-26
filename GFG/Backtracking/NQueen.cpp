@@ -12,10 +12,8 @@ bool canPlace(int k, int i)
             return false;
     return true;
 }
-
 void NQueen(int k, int n)
 {
-
     for (int i = 0; i < n; i++)
     {
         if (canPlace(k, i))
