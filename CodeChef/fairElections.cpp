@@ -14,13 +14,6 @@ void swap(int i,vector<int>&A,vector<int>&B)
 
 int main()
 {
-    // ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
-
-    // #ifndef ONLINE_JUDGE
-    // freopen("in.txt", "r", stdin);
-    // #endif
-
     int t;
     cin>>t;
     while(t--)
