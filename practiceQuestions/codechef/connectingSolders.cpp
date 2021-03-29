@@ -1,0 +1,156 @@
+//#include<bits/stdc++.h>
+#include "/Users/amitabh/stdc++.h"
+
+using namespace std;
+
+#define ff              first
+#define ss              second
+#define ll				long long
+#define pb              push_back
+#define mp              make_pair
+#define mod             1000000007
+#define inf             1e18
+#define ps(x,y)         fixed<<setprecision(y)<<x
+#define mk(arr,n,type)  type *arr=new type[n];
+#define w(x)            int x; cin>>x; while(x--)
+#define deb(x) 			cout << #x << "=" << x << endl
+#define fo(i,n)			for(i=0;i<n;i++)
+#define Fo(i,k,n) 		for(i=k;k<n?i<n:i>n;k<n?i+=1:i-=1)
+
+typedef pair<int,int> pii;
+typedef pair<ll,ll> pll;
+typedef vector<int> vi;
+typedef vector<pii> vpii;
+typedef vector<pll> vpll;
+typedef vector<vi> vvi;
+typedef unordered_set<int, int> usii;
+typedef unordered_map<int, int> umii;
+typedef map<int,int> mii;
+
+int mpow(int base, int exp);
+
+bool sorte(const pair<ll,ll>&a,const pair<ll,ll>&b){
+	
+	return (a.second>b.second);
+
+}
+
+
+void findMin(int n,vector<int>&val)
+{
+	int mid=(n/2);
+
+	if(n%2)
+	{
+		if(val[mid]==-1)
+		{
+			findMin(mid,val);
+		}
+		val[n]=2*val[mid]+n+1;
+	}
+	else{
+		if(val[mid]==-1)
+		{
+			findMin(mid,val);
+		}
+		if(val[mid-1]==-1)
+		{
+			findMin(mid-1,val);
+		}
+		val[n]=val[mid-1]+val[mid]+n+1;
+	}
+}
+
+void solve()
+{	
+	int n,x;
+	cin >>n>>x;
+
+	vector<int>val(n+1,-1);
+	val[0]=0;
+	val[1]=2;
+	val[2]=5;
+
+
+	switch(n)
+	{
+		case 1:{
+			if(x<2){
+				cout<<"-1"<<endl;
+				return;
+			}
+			else
+			{
+				cout<<x-2<<endl;
+				return;
+			}
+			
+		}
+		case 2:{
+			if(x<5){
+				cout<<"-1"<<endl;
+				return;
+			}
+			else
+			{
+				cout<<x-5<<endl;
+				return;
+			}
+			
+		}
+		default:{
+
+		}
+	}
+
+	int max=(((n+1)*(n+2))/2)-1;
+
+	findMin(n,val);
+
+	int min=val[n];
+
+	if(x<min)
+	{
+		cout<<"-1"<<endl;
+	}
+	else if(x>=min&&x<=max)
+	{
+		cout<<"0"<<endl;
+	}
+	else{
+		cout<<x-max<<endl;
+	}
+
+}
+
+void startup()
+{
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#ifndef ONLINE_JUDGE
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+#endif
+}
+
+int32_t main()
+{
+	startup();
+	w(t)
+	{
+		solve();
+	}
+	return 0;
+}
+
+int mpow(int base, int exp) {
+
+  base %= mod;
+  int result = 1;
+  while (exp > 0) {
+    if (exp & 1) result = ((ll)result * base) % mod;
+    base = ((ll)base * base) % mod;
+    exp >>= 1;
+  }
+  return result;
+}
+
