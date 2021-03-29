@@ -31,13 +31,38 @@ vector<int> fillLps(string s)
     }
     return LPS;
 }
+vector<int> fillLpsEfficient(string s)
+{
+    int i=1,len=0;
 
+    vector<int> lps(s.length(),0);
+
+    while(i<s.length())
+    {
+        while(len>0 && s[len]!=s[i])
+            len=lps[len-1];
+        if(s[len]==s[i])
+            len++;
+        lps[i++]=len;
+    }
+    return lps;
+}
 void KMP(string txt, string pat)
 {
     int N = txt.length();
     int M = pat.length();
     vector<int> lps = fillLps(pat);
-
+    vector<int> lps2 = fillLpsEfficient(pat);
+    for(auto e: lps)
+    {
+        cout<<e;
+    }
+    cout<<endl;
+    for(auto e: lps2)
+    {
+        cout<<e;
+    }
+    cout<<endl;
     int i = 0, j = 0;
 
     while (i < N)
@@ -77,3 +102,4 @@ int main()
     cout << endl;
     return 0;
 }
+ 
