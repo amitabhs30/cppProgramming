@@ -32,107 +32,9 @@ typedef map<int, int> mii;
 
 int mpow(int base, int exp);
 
-struct node{
-      int id;
-      vector<node*>children;
-      node* parent;
-      int reachableNodes;
-      int dval; 
-      bool visited=false;
-
-      void addchild(node *j)
-      {
-        children.push_back(j);
-      }
-    };
-
-void findDval(vector<node*>&tree,int node)
-{ 
-  int sum,rnodes;
-  for(auto e: tree[node]->children)
-  {
-    findDval(tree,e->id);
-  }
-  if(tree[node]->children.size()==0)
-  {
-    tree[node]->dval=0;
-    tree[node]->reachableNodes=0;
-  }
-  else
-  {
-    sum=0;
-    rnodes=0;
-    for(auto e : tree[node]->children)
-    {
-      sum+=e->dval;
-      sum+=e->reachableNodes;
-      rnodes+=e->reachableNodes;
-
-    }
-    tree[node]->dval=tree[node]->children.size()+sum;
-    tree[node]->reachableNodes=rnodes+tree[node]->children.size();
-  }
-}
-
-int findNDval(vector<node*>&tree,node* parent,node* node){
-    node->visited=true;
-    int ndval=0;
-    ndval=parent->dval+(tree.size()-2)-(2*node->children.size());
-    node->dval=ndval;
-
-    return ndval;
-}
-
-void findResult(vector<int>&result,vector<node*>&tree,node* parent)
-{
-  parent->visited=true;
-  for(auto e: parent->children)
-  {
-    if(!(e->visited))
-    result[e->id]=findNDval(tree,parent,e);
-    findResult(result,tree,e);
-  }
-}
-
 void solve()
 {
-  int n;
-  vector<vector<int> >edges(1,vector<int>(2));
-  cin>>n;
-  unordered_map<int,node*>map;
-  vector<node *>tree(n);
-
-  for(int i=0;i<n;i++)
-  {
-    tree[i]=new node();
-    map.insert(make_pair(i,tree[i]));
-    tree[i]->id=i;
-  }
-  for(int i=0;i<1;i++)
-  {
-    for(int j=0;j<2;j++)
-    {
-      cin>>edges[i][j];
-    }
-  }
-
-  for(int i=0;i<edges.size();i++)
-  {
-      map.at(edges[i][0])->addchild(map.at(edges[i][1]));
-      //map.at(edges[i][1])->addchild(map.at(edges[i][0]));
-      map.at(edges[i][1])->parent=map.at(edges[i][0]);
-  }
-  findDval(tree,0);
-  vector<int>result(n,0);
-  result[0]=map.at(0)->dval;
   
-  findResult(result,tree,map.at(0));
-
-
-  for(int i=0;i<n;i++)
-  {
-    cout<<result[i]<<" ";
-  }
 
 }
 
@@ -150,10 +52,10 @@ void startup()
 int32_t main()
 {
   startup();
-  //w(t)
-  //{
+  w(t)
+  {
   solve();
-  //}
+  }
   return 0;
 }
 
