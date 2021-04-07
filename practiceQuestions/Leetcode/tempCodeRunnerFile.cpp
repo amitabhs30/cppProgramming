@@ -1,0 +1,1 @@
+mp.find(city)!=mp.end()
