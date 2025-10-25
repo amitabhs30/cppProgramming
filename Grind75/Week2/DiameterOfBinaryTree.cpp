@@ -26,4 +26,4 @@ class Solution{
         int diameterOfBinaryTree(TreeNode* root){
             return dfs(root);
         }
-}
+};
